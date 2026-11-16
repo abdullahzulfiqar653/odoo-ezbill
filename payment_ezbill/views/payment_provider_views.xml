@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_provider_form" model="ir.ui.view">
+        <field name="name">EZBILL Provider Form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position="inside">
+                <group invisible="code != 'ezbill'" name="ezbill_credentials">
+                    <field name="ezbill_api_key"
+                           string="API Key"
+                           required="code == 'ezbill' and state != 'disabled'"
+                           password="True"
+                           placeholder="ez_test_… (Test Mode) or ez_live_… (Enabled)"/>
+                    <field name="ezbill_webhook_secret"
+                           string="Webhook Secret"
+                           required="code == 'ezbill' and state != 'disabled'"
+                           password="True"/>
+                    <field name="ezbill_expiry_minutes"/>
+                    <field name="ezbill_webhook_url" widget="CopyClipboardChar"/>
+                    <div class="text-muted" colspan="2">
+                        Test Mode uses the EZBILL sandbox (ez_test_ key); Enabled takes real Raast payments (ez_live_ key).
+                        Keys and webhooks are managed at <a href="https://ezbill.pk/developers/" target="_blank">ezbill.pk/developers</a>.
+                    </div>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="payment_provider_ezbill" model="payment.provider">
+        <field name="name">EZBILL</field>
+        <field name="code">ezbill</field>
+        <field name="image_128" type="base64" file="payment_ezbill/static/description/icon.png"/>
+        <field name="module_id" ref="base.module_payment_ezbill"/>
+        <field name="redirect_form_view_id" ref="redirect_form"/>
+        <field name="available_currency_ids" eval="[Command.set([ref('base.PKR')])]"/>
+        <field name="payment_method_ids" eval="[Command.set([ref('payment_ezbill.payment_method_ezbill')])]"/>
+        <field name="pre_msg"><![CDATA[<p>Pay with any bank app, JazzCash or Easypaisa by scanning a Raast QR code.</p>]]></field>
+    </record>
+
+</odoo>

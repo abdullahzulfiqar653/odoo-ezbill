@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Submitted automatically by Odoo's payment form after the QR is created. -->
+    <template id="redirect_form">
+        <form t-att-action="api_url" method="get">
+            <input type="hidden" name="reference" t-att-value="reference"/>
+            <input type="hidden" name="access_token" t-att-value="access_token"/>
+        </form>
+    </template>
+
+    <template id="ezbill_pay_page" name="EZBILL Raast QR">
+        <t t-call="portal.frontend_layout">
+            <div class="container o_ezbill_pay my-5">
+                <div class="o_ezbill_card mx-auto text-center"
+                     t-att-data-poll-url="poll_url"
+                     t-att-data-expires-at="tx.ezbill_expires_at or ''">
+                    <h3 class="mb-1">Scan to pay</h3>
+                    <p class="text-muted mb-3">
+                        Open any bank app, JazzCash or Easypaisa, choose <strong>Scan QR</strong> (Raast) and confirm.
+                    </p>
+                    <div class="o_ezbill_amount mb-1" t-esc="amount_display"/>
+                    <div class="text-muted small mb-3">Reference <span t-esc="tx.reference"/></div>
+                    <t t-if="tx.ezbill_qr_string">
+                        <img class="o_ezbill_qr img-fluid" t-att-src="qr_image_url" alt="Raast payment QR code" width="280" height="280"/>
+                    </t>
+                    <t t-else="">
+                        <div class="alert alert-warning">The QR code is not available. Please go back and try again.</div>
+                    </t>
+                    <div class="o_ezbill_status mt-3" role="status" aria-live="polite">
+                        <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"/>
+                        <span class="o_ezbill_status_text">Waiting for payment…</span>
+                    </div>
+                    <p class="small text-muted mt-3 mb-0">
+                        This page updates by itself once the payment arrives. Do not pay twice.
+                    </p>
+                    <p class="small mt-2 mb-0">
+                        <a href="/payment/status">Check payment status</a>
+                    </p>
+                    <p class="small text-muted mt-3 mb-0">
+                        Secured by <a href="https://ezbill.pk" target="_blank" rel="noopener">EZBILL</a> · Raast
+                        <t t-if="tx.provider_id.state == 'test'"> · <strong>TEST MODE</strong></t>
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

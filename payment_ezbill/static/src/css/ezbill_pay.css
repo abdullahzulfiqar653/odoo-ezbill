@@ -1,0 +1,20 @@
+.o_ezbill_card {
+    max-width: 420px;
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 6px 24px rgba(15, 26, 23, 0.06);
+}
+.o_ezbill_amount {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0e6b3f;
+}
+.o_ezbill_qr {
+    padding: 12px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    image-rendering: pixelated;
+}
